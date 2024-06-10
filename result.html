@@ -9,18 +9,21 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
-            margin-right: 50px;
             background: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
         }
         .container h2 {
             margin-top: 0;
@@ -50,7 +53,26 @@
             background: #0056b3;
         }
         .results {
-            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        @media (min-width: 768px) {
+            body {
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .container, .results {
+                margin-right: 20px;
+            }
+            .results {
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -72,10 +94,9 @@
             </select>
         </div>
         <button onclick="showResult()">Show Result</button>
-        
     </div>
     <div class="results" id="results"></div>
-    
+
     <script>
         function showResult() {
             const stnum = document.getElementById('stnum').value;
@@ -84,9 +105,7 @@
 
             fetch(url)
                 .then(response => response.text())
-                
                 .then(data => {
-                    console.log(data);
                     document.getElementById('results').innerHTML = data;
                 })
                 .catch(error => {
