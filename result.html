@@ -48,6 +48,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-bottom: 20px;
         }
         button:hover {
             background: #0056b3;
@@ -60,6 +61,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow-x: auto;
+            
         }
         @media (min-width: 768px) {
             body {
@@ -94,8 +96,11 @@
             </select>
         </div>
         <button onclick="showResult()">Show Result</button>
+        <div class="image" id="stimg"></div>
+        
     </div>
     <div class="results" id="results"></div>
+    
 
     <script>
         function showResult() {
@@ -105,12 +110,17 @@
 
             fetch(url)
                 .then(response => response.text())
+                
                 .then(data => {
                     document.getElementById('results').innerHTML = data;
+                })
+                .then(() => {
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
                     document.getElementById('results').innerHTML = `<p style="color:red;">Error fetching results: ${error}</p>`;
                 });
+                
         }
     </script>
 </body>
