@@ -5,16 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Results</title>
     <style>
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        }
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        #background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             height: 100vh;
-            margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            background-color: rgba(244, 244, 244, 0.8);
         }
         .container {
             background: white;
@@ -61,10 +89,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow-x: auto;
-            
         }
         @media (min-width: 768px) {
-            body {
+            .content {
                 flex-direction: row;
                 justify-content: center;
                 align-items: flex-start;
@@ -79,28 +106,35 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Get Student Results</h2>
-        <p>(Eg: if your index: SC/2021/1111, Enter: 1111)</p>
-        <div class="form-group">
-            <label for="stnum">Student Number</label>
-            <input type="number" id="stnum" name="stnum" required>
-        </div>
-        <div class="form-group">
-            <label for="rlevel">Result Level</label>
-            <select id="rlevel" name="rlevel">
-                <option value="1">Level 1</option>
-                <option value="2">Level 2</option>
-                <option value="3">Level 3</option>
-                <option value="4">Level 4</option>
-            </select>
-        </div>
-        <button onclick="showResult()">Show Result</button>
-        <div class="image" id="stimg"></div>
-        
+    <div class="video-container">
+        <video autoplay muted loop id="background-video">
+            <source src="./bg_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-    <div class="results" id="results"></div>
-    
+
+    <div class="content">
+        <div class="container">
+            <h2>Get Student Results</h2>
+            <p>(Eg: if your index: SC/2021/1111, Enter: 1111)</p>
+            <div class="form-group">
+                <label for="stnum">Student Number</label>
+                <input type="number" id="stnum" name="stnum" required>
+            </div>
+            <div class="form-group">
+                <label for="rlevel">Result Level</label>
+                <select id="rlevel" name="rlevel">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                </select>
+            </div>
+            <button onclick="showResult()">Show Result</button>
+            <div class="image" id="stimg"></div>
+        </div>
+        <div class="results" id="results"></div>
+    </div>
 
     <script>
         function showResult() {
@@ -110,7 +144,6 @@
 
             fetch(url)
                 .then(response => response.text())
-                
                 .then(data => {
                     document.getElementById('results').innerHTML = data;
                 })
@@ -120,7 +153,6 @@
                 .catch(error => {
                     document.getElementById('results').innerHTML = `<p style="color:red;">Error fetching results: ${error}</p>`;
                 });
-                
         }
     </script>
 </body>
