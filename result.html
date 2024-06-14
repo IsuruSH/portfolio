@@ -10,7 +10,10 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #00FF00;
+            
         }
         .video-container {
             position: fixed;
@@ -19,7 +22,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            z-index: -1;
+            z-index: 2;
         }
         #background-video {
             position: absolute;
@@ -31,10 +34,35 @@
             height: auto;
             z-index: -1;
             transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+        .animated-text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 20;
+            color: #00FF00;
+            font-size: 20px;
+            opacity: 0.5;
+        }
+        .animated-text {
+            position: absolute;
+            animation: moveText 10s linear infinite;
+        }
+        @keyframes moveText {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
         }
         .content {
             position: relative;
-            z-index: 1;
+            
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -42,16 +70,17 @@
             height: 100vh;
             padding: 20px;
             box-sizing: border-box;
-            background-color: rgba(244, 244, 244, 0.8);
+            background-color: rgba(0, 0, 0, 0.8);
         }
         .container {
-            background: white;
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             border-radius: 8px;
             width: 100%;
             max-width: 300px;
             margin-bottom: 20px;
+            z-index: 100;
         }
         .container h2 {
             margin-top: 0;
@@ -67,28 +96,32 @@
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
+            background: #333;
+            color: #00FF00;
+            border: 1px solid #00FF00;
         }
         button {
             width: 100%;
             padding: 10px;
-            background: #007BFF;
-            color: white;
+            background: #00FF00;
+            color: #000;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             margin-bottom: 20px;
         }
         button:hover {
-            background: #0056b3;
+            background: #00CC00;
         }
         .results {
             width: 100%;
-            max-width: 400px;
-            background: white;
+            max-width: 50%;
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             border-radius: 8px;
             overflow-x: auto;
+            z-index: 100;
         }
         @media (min-width: 768px) {
             .content {
@@ -101,6 +134,7 @@
             }
             .results {
                 margin-top: 0;
+                
             }
         }
     </style>
@@ -111,6 +145,28 @@
             <source src="./bg_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+    </div>
+
+    <div class="animated-text-container">
+        <div class="animated-text" style="top: 5%; left: 5%;">H4CK3R 1NT3RF4C3</div>
+        <div class="animated-text" style="top: 10%; left: 20%;">C0D3 RUNNING...</div>
+        <div class="animated-text" style="top: 15%; left: 40%;">ACC3SS GR4NT3D</div>
+        <div class="animated-text" style="top: 20%; left: 60%;">D4T4 R3TR13V3D</div>
+        <div class="animated-text" style="top: 25%; left: 80%;">3X3CUT1NG...</div>
+        <div class="animated-text" style="top: 30%; left: 10%;">1N1T14L1Z1NG...</div>
+        <div class="animated-text" style="top: 35%; left: 30%;">L04D1NG M0DUL3</div>
+        <div class="animated-text" style="top: 40%; left: 50%;">ENCRYPT1ON</div>
+        <div class="animated-text" style="top: 45%; left: 70%;">D3CRYPT1ON</div>
+        <div class="animated-text" style="top: 50%; left: 90%;">UPL04D1NG</div>
+        <div class="animated-text" style="top: 55%; left: 5%;">D0WNLOAD1NG</div>
+        <div class="animated-text" style="top: 60%; left: 20%;">SYNT4X 3RR0R</div>
+        <div class="animated-text" style="top: 65%; left: 40%;">C0NNECT1NG...</div>
+        <div class="animated-text" style="top: 70%; left: 60%;">F1N4L1Z1NG...</div>
+        <div class="animated-text" style="top: 75%; left: 80%;">TR4NSF3RR1NG</div>
+        <div class="animated-text" style="top: 80%; left: 10%;">C0MP1L1NG</div>
+        <div class="animated-text" style="top: 85%; left: 30%;">D3BUGG1NG</div>
+        <div class="animated-text" style="top: 90%; left: 50%;">SHUTT1NG D0WN</div>
+        <div class="animated-text" style="top: 95%; left: 70%;">R3START1NG</div>
     </div>
 
     <div class="content">
