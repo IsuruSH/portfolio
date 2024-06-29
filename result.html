@@ -52,47 +52,19 @@
         }
         button:hover {
             background: #0056b3;
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -60,6 +61,7 @@
-  
         }
         .results {
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
             background: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow-x: auto;
-
+            
         }
         @media (min-width: 768px) {
             body {
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -94,8 +96,11 @@ <h2>Get Student Results</h2>
-  
                 flex-direction: row;
                 justify-content: center;
                 align-items: flex-start;
@@ -125,31 +97,18 @@
         </div>
         <button onclick="showResult()">Show Result</button>
         <div class="image" id="stimg"></div>
-
+        
     </div>
     <div class="results" id="results"></div>
-
-
+    
     <script>
         function showResult() {
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -105,12 +110,17 @@ <h2>Get Student Results</h2>
-  
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
             const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
-
             fetch(url)
                 .then(response => response.text())
-
+                
                 .then(data => {
                     document.getElementById('results').innerHTML = data;
                 })
@@ -159,19 +118,8 @@
                 .catch(error => {
                     document.getElementById('results').innerHTML = `<p style="color:red;">Error fetching results: ${error}</p>`;
                 });
-
+                
         }
     </script>
 </body>
-
-    
-          
-            
-    
-
-          
-         
-    
-    
-  
 </html>
