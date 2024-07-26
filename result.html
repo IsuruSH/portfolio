@@ -109,19 +109,25 @@
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
-            const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
+            const url = `http://localhost:3000/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No Access to View This Data');
+                    }
+                    return response;
+                })
                 .then(response => response.json())
                 
                 .then(data => {
                     document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div>`;
-                })
-                .then(() => {
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
-                    document.getElementById('results').innerHTML = `<p style="color:red;">Error fetching results: ${error}</p>`;
+                    document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p>`;
+                    document.getElementById('gpa').innerHTML = `<div>GPA: PAKADA BALANNE?</div>`;
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
                 });
                 
         }
