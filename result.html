@@ -99,20 +99,24 @@
         </div>
         <button onclick="showResult()">Show Result</button>
         <div class="image" id="stimg"></div>
+        <br>
+        <div class="gpa" id="gpa"></div>
         
     </div>
+
     <div class="results" id="results"></div>
     
     <script>
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
-            const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
+            const url = `http://localhost:3000/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
-                .then(response => response.text())
+                .then(response => response.json())
                 
                 .then(data => {
-                    document.getElementById('results').innerHTML = data;
+                    document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
+                    document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div>`;
                 })
                 .then(() => {
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
