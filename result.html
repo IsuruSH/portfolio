@@ -122,7 +122,7 @@
                 .then(data => {
                     document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div>`;
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
                     document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p>`;
