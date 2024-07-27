@@ -74,7 +74,6 @@
             }
             .results {
                 margin-top: 0;
-                
             }
         }
     </style>
@@ -135,9 +134,9 @@
                     document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p><br>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: No Access!!</div><br>`;
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
-                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
-                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
-                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
+                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${error.message}</div><br>`;
+                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${error.message}</div><br>`;
+                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${error.message}</div><br>`;
                    
                 });
                 
