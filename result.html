@@ -90,6 +90,7 @@
         <div class="form-group">
             <label for="rlevel">Result Level</label>
             <select id="rlevel" name="rlevel">
+                <option value="4">All</option>
                 <option value="1">Level 1</option>
                 <option value="2">Level 2</option>
                 <option value="3">Level 3</option>
@@ -100,6 +101,9 @@
         <div class="image" id="stimg"></div>
         <br>
         <div class="gpa" id="gpa"></div>
+        <div class="mathgpa" id="mathgpa"></div>
+        <div class="chegpa" id="chegpa"></div>
+        <div class="phygpa" id="phygpa"></div>
         
     </div>
 
@@ -109,7 +113,7 @@
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
-            const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
+            const url = `http://localhost:3000/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -121,13 +125,20 @@
                 
                 .then(data => {
                     document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
-                    document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div>`;
+                    document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
+                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
+                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
+                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
-                    document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p>`;
-                    document.getElementById('gpa').innerHTML = `<div>GPA: PAKADA BALANNE?</div>`;
+                    document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p><br>`;
+                    document.getElementById('gpa').innerHTML = `<div>GPA: PAKADA BALANNE?</div><br>`;
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
+                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
+                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
+                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
+                   
                 });
                 
         }
