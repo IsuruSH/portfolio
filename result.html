@@ -103,6 +103,10 @@
         <div class="mathgpa" id="mathgpa"></div>
         <div class="chegpa" id="chegpa"></div>
         <div class="phygpa" id="phygpa"></div>
+        <div class="zoogpa" id="zoogpa"></div>
+        <div class="botgpa" id="botgpa"></div>
+        <div class="csgpa" id="csgpa"></div>
+        
         
     </div>
 
@@ -128,6 +132,9 @@
                     document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
                     document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
                     document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
+                    document.getElementById('zoogpa').innerHTML = `<div>Zoology GPA: ${data.zooGpa}</div><br>`;
+                    document.getElementById('botgpa').innerHTML = `<div>Botany GPA: ${data.botGpa}</div><br>`;
+                    document.getElementById('csgpa').innerHTML = `<div>Computer Science GPA: ${data.csGpa}</div><br>`;
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
