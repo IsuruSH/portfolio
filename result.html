@@ -129,12 +129,41 @@
                 .then(data => {
                     document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
-                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
-                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
-                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
-                    document.getElementById('zoogpa').innerHTML = `<div>Zoology GPA: ${data.zooGpa}</div><br>`;
-                    document.getElementById('botgpa').innerHTML = `<div>Botany GPA: ${data.botGpa}</div><br>`;
-                    document.getElementById('csgpa').innerHTML = `<div>Computer Science GPA: ${data.csGpa}</div><br>`;
+                    if (!isNaN(data.mathGpa)) {
+                        document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
+                    } else {
+                        document.getElementById('mathgpa').innerHTML = '';
+                    }
+
+                    if (!isNaN(data.cheGpa)) {
+                        document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
+                    } else {
+                        document.getElementById('chegpa').innerHTML = '';
+                    }
+
+                    if (!isNaN(data.phyGpa)) {
+                        document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
+                    } else {
+                        document.getElementById('phygpa').innerHTML = '';
+                    }
+
+                    if (!isNaN(data.zooGpa)) {
+                        document.getElementById('zoogpa').innerHTML = `<div>Zoology GPA: ${data.zooGpa}</div><br>`;
+                    } else {
+                        document.getElementById('zoogpa').innerHTML = '';
+                    }
+
+                    if (!isNaN(data.botGpa)) {
+                        document.getElementById('botgpa').innerHTML = `<div>Botany GPA: ${data.botGpa}</div><br>`;
+                    } else {
+                        document.getElementById('botgpa').innerHTML = '';
+                    }
+
+                    if (!isNaN(data.csGpa)) {
+                        document.getElementById('csgpa').innerHTML = `<div>Computer Science GPA: ${data.csGpa}</div><br>`;
+                    } else {
+                        document.getElementById('csgpa').innerHTML = '';
+                    }
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
