@@ -112,7 +112,7 @@
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
-            const url = `http://localhost:3000/results?stnum=${stnum}&rlevel=${rlevel}`;
+            const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
