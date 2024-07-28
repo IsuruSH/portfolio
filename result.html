@@ -113,6 +113,17 @@
     <div class="results" id="results"></div>
     
     <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable certain key combinations
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'a' || event.key === 'p')) {
+                event.preventDefault();
+            }
+            if (event.key === 'F12') {
+                event.preventDefault();
+            }
+        });
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
