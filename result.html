@@ -116,69 +116,56 @@
         function showResult() {
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
+            
+
             const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('No Access to View This Data');
                     }
-                    return response;
+                    return response.json();
                 })
-                .then(response => response.json())
-                
                 .then(data => {
-                    document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
-                    document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
-                    if (!isNaN(data.mathGpa)) {
-                        document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${data.mathGpa}</div><br>`;
+                    const elementsToClear = ['gpa', 'mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
+                    if (data.message === 'Rest in Peace') {
+                        const hMessage = `
+                            <p style="color:red; text-align:center;">
+                                <strong>Rest in Heaven</strong><br><br>
+                                Our hearts are heavy with sorrow as we remember a beloved student who is no longer with us.
+                                May their soul find eternal peace, and may their memory live on in the hearts of all who knew and loved them.
+                            </p>`;
+                        document.getElementById('results').innerHTML = hMessage;
+                        elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
                     } else {
-                        document.getElementById('mathgpa').innerHTML = '';
-                    }
+                        document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
+                        document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
+                        
+                        const gpas = {
+                            mathgpa: data.mathGpa,
+                            chegpa: data.chemGpa,
+                            phygpa: data.phyGpa,
+                            zoogpa: data.zooGpa,
+                            botgpa: data.botGpa,
+                            csgpa: data.csGpa
+                        };
 
-                    if (!isNaN(data.cheGpa)) {
-                        document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${data.cheGpa}</div><br>`;
-                    } else {
-                        document.getElementById('chegpa').innerHTML = '';
-                    }
-
-                    if (!isNaN(data.phyGpa)) {
-                        document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${data.phyGpa}</div><br>`;
-                    } else {
-                        document.getElementById('phygpa').innerHTML = '';
-                    }
-
-                    if (!isNaN(data.zooGpa)) {
-                        document.getElementById('zoogpa').innerHTML = `<div>Zoology GPA: ${data.zooGpa}</div><br>`;
-                    } else {
-                        document.getElementById('zoogpa').innerHTML = '';
-                    }
-
-                    if (!isNaN(data.botGpa)) {
-                        document.getElementById('botgpa').innerHTML = `<div>Botany GPA: ${data.botGpa}</div><br>`;
-                    } else {
-                        document.getElementById('botgpa').innerHTML = '';
-                    }
-
-                    if (!isNaN(data.csGpa)) {
-                        document.getElementById('csgpa').innerHTML = `<div>Computer Science GPA: ${data.csGpa}</div><br>`;
-                    } else {
-                        document.getElementById('csgpa').innerHTML = '';
+                        for (const [id, gpa] of Object.entries(gpas)) {
+                            document.getElementById(id).innerHTML = !isNaN(gpa) ? `<div>${id.split('gpa')[0].toUpperCase()} GPA: ${gpa}</div><br>` : '';
+                        }
+                        
                     }
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 })
                 .catch(error => {
+                    
                     document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p><br>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: No Access!!</div><br>`;
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum}.jpg" width="100px" alt="">`;
-                    document.getElementById('mathgpa').innerHTML = `<div>Maths GPA: ${error.message}</div><br>`;
-                    document.getElementById('chegpa').innerHTML = `<div>Chemistry GPA: ${error.message}</div><br>`;
-                    document.getElementById('phygpa').innerHTML = `<div>Physics GPA: ${error.message}</div><br>`;
-                    document.getElementById('zoogpa').innerHTML = `<div>Maths GPA: ${error.message}</div><br>`;
-                    document.getElementById('botgpa').innerHTML = `<div>Chemistry GPA: ${error.message}</div><br>`;
-                    document.getElementById('csgpa').innerHTML = `<div>Physics GPA: ${error.message}</div><br>`;
-                   
+                    
+                    const elementsToClear = ['mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
+                    elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                 });
-                
         }
     </script>
 </body>
