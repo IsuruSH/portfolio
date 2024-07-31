@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Results</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Results</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,7 +75,12 @@
             margin-bottom: 20px;
         }
 
-        button:hover {
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
             background: #0056b3;
         }
 
@@ -130,7 +132,7 @@
                     <option value="4">Level 4</option>
                 </select>
             </div>
-            <button onclick="showResult()">Show Result</button>
+            <button id="resultButton" onclick="showResult()">Show Result</button>
             <div class="image" id="stimg"></div>
             <br>
             <div class="gpa" id="gpa"></div>
@@ -176,8 +178,10 @@
                     <option value="csGpa">Computer Science GPA</option>
                 </select>
             </div>
-            <div style="color: red;">This result may be delay more than 40 seconds due to higher calculations! Do not press the button more than once!</div><br>
-            <button onclick="showRank()">Show Rank</button>
+            <div style="color: red;">This result may be delay more than due to higher calculations!</div><br>
+            <button id="rankButton" onclick="showRank()">Show Rank</button>
+            
+
             <div id="rankresults"></div>
         </div>
     </div>
@@ -195,11 +199,28 @@
                 event.preventDefault();
             }
         });
+
+        function disableResultButton() {
+            document.getElementById('resultButton').disabled = true;
+        }
+
+        function enableResultButton() {
+            document.getElementById('resultButton').disabled = false;
+        }
+
+        function disableRankButton() {
+            document.getElementById('rankButton').disabled = true;
+        }
+
+        function enableRankButton() {
+            document.getElementById('rankButton').disabled = false;
+        }
+
         function showResult() {
+            disableResultButton();
             const stnum = document.getElementById('stnum').value;
             const rlevel = document.getElementById('rlevel').value;
             
-
             const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
             fetch(url)
                 .then(response => {
@@ -239,19 +260,21 @@
                         
                     }
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
+                    enableResultButton();
                 })
                 .catch(error => {
-                    
                     document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p><br>`;
                     document.getElementById('gpa').innerHTML = `<div>GPA: No Access!!</div><br>`;
                     
                     const elementsToClear = ['mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
                     elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
                     document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
+                    enableResultButton();
                 });
         }
 
         function showRank() {
+            disableRankButton();
             const startnum = parseInt(document.getElementById('startnum').value, 10);
             const endnum = parseInt(document.getElementById('endnum').value, 10);
             const stnumrank = parseInt(document.getElementById('stnumrank').value, 10);
@@ -259,14 +282,17 @@
             
             if (isNaN(startnum) || isNaN(endnum) || isNaN(stnumrank) || stnumrank < startnum || stnumrank > endnum) {
                 alert('Please enter a valid student number within the specified range.');
+                enableRankButton();
                 return;
             }
             if(startnum > endnum){
                 alert('Please enter a valid range.');
+                enableRankButton();
                 return;
             }
             if(endnum - startnum > 400){
                 alert('Please enter a range less than 100.');
+                enableRankButton();
                 return;
             }
 
@@ -282,9 +308,11 @@
                         <div>Average GPA: ${data.averageGpa}</div><br>
                     `;
                     document.getElementById('rankresults').innerHTML = rankResult;
+                    enableRankButton();
                 })
                 .catch(error => {
                     document.getElementById('rankresults').innerHTML = `<p style="color:red;">Error fetching rank data: ${error.message}</p>`;
+                    enableRankButton();
                 });
         }
     </script>
