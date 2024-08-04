@@ -259,7 +259,7 @@
                         }
                         
                     }
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(0) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                     enableResultButton();
                 })
                 .catch(error => {
@@ -268,7 +268,7 @@
                     
                     const elementsToClear = ['mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
                     elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(9) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
+                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(0) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
                     enableResultButton();
                 });
         }
