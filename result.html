@@ -1,340 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Results</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
 
-        .main {
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: auto auto;
-            
-        }
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .container-res, .container-rank {
-            width: 90%;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin: 10px 10px;
-        }
+      .main {
+        width: 100%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto auto;
+      }
 
-        .container-res {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
+      .container-res,
+      .container-rank,
+      .gpa-check {
+        width: 90%;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin: 10px 10px;
+      }
 
-        .container, .results {
-            flex: 1;
-            margin: 10px;
-        }
+      .container-res {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
 
-        .container h2 {
-            margin-top: 0;
-        }
+      .container,
+      .results {
+        flex: 1;
+        margin: 10px;
+      }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+      .container h2 {
+        margin-top: 0;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+      .form-group {
+        margin-bottom: 15px;
+      }
 
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-         .footer {
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .footer {
         width: 100%;
         text-align: center;
-        
-        background-color: #007BFF;
+
+        background-color: #007bff;
         color: white;
         position: relative;
         bottom: 0;
         margin-top: 20px;
         padding: 8px;
-        
-    }
+      }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 20px;
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+
+      button:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+
+      button:hover:not(:disabled) {
+        background: #0056b3;
+      }
+      .gpa-check {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .gpa-check h2 {
+        text-align: center;
+      }
+
+      .gpa-check .form-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .gpa-check .form-group input {
+        width: 48%;
+      }
+
+      .add-field-btn {
+        margin-bottom: 20px;
+        background-color: #28a745;
+      }
+
+      .gpa-result {
+        margin-top: 20px;
+      }
+
+      .remove-field-link {
+        color: #dc3545;
+        text-decoration: none;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .remove-field-link:hover {
+        text-decoration: underline;
+        color: #c82333;
+      }
+
+      @media (min-width: 769px) {
+        body {
+          align-items: flex-start;
         }
 
-        button:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
+        .container-res {
+          flex-direction: row;
+          margin-bottom: 20px;
         }
 
-        button:hover:not(:disabled) {
-            background: #0056b3;
+        .container,
+        .results {
+          max-width: 100%;
+          margin: 0;
         }
 
-        @media (min-width: 769px) {
-            body {
-                align-items: flex-start;
-            }
-
-            .container-res {
-                flex-direction: row;
-                margin-bottom: 20px;
-            }
-
-            .container, .results {
-                max-width: 100%;
-                margin: 0;
-            }
-
-            .results {
-                margin-left: 20px;
-            }
-
-            .container-rank {
-                margin-top: 0;
-            }
-            
+        .results {
+          margin-left: 20px;
         }
+
+        .container-rank {
+          margin-top: 0;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="main">
-
-    <div style="color: red; margin: 10px">Response times may be slower as our server is hosted on a free platform. Thank you for your patience!</div>
-        
-        <img src="https://media.licdn.com/dms/image/v2/D5603AQGGRwFgYxM3kw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1702265372981?e=1733356800&v=beta&t=u112JqiXGcrgBdV-H1ZkicMGnRPuToI8SQUb2ipZsQA" width="400px" alt="">
-     <div style="color: red; margin: 10px">Many Happy Returns of the Day Dulan!</div>
-        <div class="container-res">
-       
+      <div style="color: red; margin: 10px">
+        Response times may be slower as our server is hosted on a free platform.
+        Thank you for your patience!
+      </div>
+      <img
+        src="https://media.licdn.com/dms/image/v2/D5603AQGGRwFgYxM3kw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1702265372981?e=1733356800&v=beta&t=u112JqiXGcrgBdV-H1ZkicMGnRPuToI8SQUb2ipZsQA"
+        width="400px"
+        alt=""
+      />
+      <div style="color: red; margin: 10px">
+        Many Happy Returns of the Day Dulan!
+      </div>
+      <div class="container-res">
         <div class="container">
-            <h2>Get Student Results</h2>
-            <p>(Eg: if your index: SC/2021/1111, Enter: 1111)</p>
-            <div class="form-group">
-                <label for="stnum">Student Number</label>
-                <input type="number" id="stnum" name="stnum" required>
-            </div>
-            <div class="form-group">
-                <label for="rlevel">Result Level</label>
-                <select id="rlevel" name="rlevel">
-                    <option value="4">All</option>
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3">Level 3</option>
-                    <option value="4">Level 4</option>
-                </select>
-            </div>
-            <button id="resultButton" onclick="showResult()">Show Result</button>
-            <div class="image" id="stimg"></div>
-            <br>
-            <div class="gpa" id="gpa"></div>
-            <div class="mathgpa" id="mathgpa"></div>
-            <div class="chegpa" id="chegpa"></div>
-            <div class="phygpa" id="phygpa"></div>
-            <div class="zoogpa" id="zoogpa"></div>
-            <div class="botgpa" id="botgpa"></div>
-            <div class="csgpa" id="csgpa"></div>
-            
-            
+          <h2>Get Student Results</h2>
+          <p>(Eg: if your index: SC/2021/1111, Enter: 1111)</p>
+          <div class="form-group">
+            <label for="stnum">Student Number</label>
+            <input type="number" id="stnum" name="stnum" required />
+          </div>
+          <div class="form-group">
+            <label for="rlevel">Result Level</label>
+            <select id="rlevel" name="rlevel">
+              <option value="4">All</option>
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+            </select>
+          </div>
+          <button id="resultButton" onclick="showResult()">Show Result</button>
+          <div class="image" id="stimg"></div>
+          <br />
+          <div class="gpa" id="gpa"></div>
+          <div class="mathgpa" id="mathgpa"></div>
+          <div class="chegpa" id="chegpa"></div>
+          <div class="phygpa" id="phygpa"></div>
+          <div class="zoogpa" id="zoogpa"></div>
+          <div class="botgpa" id="botgpa"></div>
+          <div class="csgpa" id="csgpa"></div>
         </div>
 
         <div class="results" id="results"></div>
+      </div>
 
-    </div>
-    
-    <div class="container-rank">
-        <div class="container">
-            <h2>Get Student Rank</h2>
-            <p>(Enter the start number and end number of your range to check the rank)</p>
-            <div class="form-group">
-                <label for="startnum">Start Number</label>
-                <input type="number" id="startnum" name="startnum" required>
-            </div>
-            <div class="form-group">
-                <label for="endnum">End Number</label>
-                <input type="number" id="endnum" name="endnum" required>
-            </div>
-            <div class="form-group">
-                <label for="stnumrank">Your Student Number</label>
-                <input type="number" id="stnumrank" name="stnumrank" required>
-            </div>
-            <div class="form-group">
-                <label for="gpatype">GPA Type</label>
-                <select id="gpatype" name="gpatype">
-                    <option value="gpa">Overall GPA</option>
-                    <option value="mathGpa">Math GPA</option>
-                    <option value="cheGpa">Chemistry GPA</option>
-                    <option value="phyGpa">Physics GPA</option>
-                    <option value="zooGpa">Zoology GPA</option>
-                    <option value="botGpa">Botany GPA</option>
-                    <option value="csGpa">Computer Science GPA</option>
-                </select>
-            </div>
-            <div style="color: red;">This result may be delay more than due to higher calculations!</div><br>
-            <button id="rankButton" onclick="showRank()">Show Rank</button>
-            
-
-            <div id="rankresults"></div>
+      <div class="gpa-check">
+        <h2>Check GPA with Manual Results</h2>
+        <div style="color: red; margin: 10px">
+          When entering subject codes enter 'a' for 'α', 'b' for 'β', 'd' for
+          'δ'
         </div>
-    </div>
+        <form id="gpaForm">
+          <!-- Student number field -->
+          <div class="form-group">
+            <input
+              type="number"
+              name="studentNumber"
+              placeholder="Student Number"
+              required
+            />
+          </div>
+
+          <!-- Subject and grade fields -->
+          <div class="form-group">
+            <input
+              type="text"
+              name="subjectCode[]"
+              placeholder="Subject Code"
+              required
+            />
+            <input
+              type="text"
+              name="grade[]"
+              placeholder="Grade (e.g. A+)"
+              required
+            />
+          </div>
+
+          <button type="button" class="add-field-btn" onclick="addField()">
+            Add Another Subject
+          </button>
+
+          <button type="submit">Check GPA</button>
+        </form>
+
+        <div class="gpa" id="newgpa"></div>
+        <div class="mathgpa" id="newmathgpa"></div>
+        <div class="chegpa" id="newchegpa"></div>
+        <div class="phygpa" id="newphygpa"></div>
+        <div class="zoogpa" id="newzoogpa"></div>
+        <div class="botgpa" id="newbotgpa"></div>
+        <div class="csgpa" id="newcsgpa"></div>
+      </div>
+      <div class="container-rank">
+        <div class="container">
+          <h2>Get Student Rank</h2>
+          <p>
+            (Enter the start number and end number of your range to check the
+            rank)
+          </p>
+          <div class="form-group">
+            <label for="startnum">Start Number</label>
+            <input type="number" id="startnum" name="startnum" required />
+          </div>
+          <div class="form-group">
+            <label for="endnum">End Number</label>
+            <input type="number" id="endnum" name="endnum" required />
+          </div>
+          <div class="form-group">
+            <label for="stnumrank">Your Student Number</label>
+            <input type="number" id="stnumrank" name="stnumrank" required />
+          </div>
+          <div class="form-group">
+            <label for="gpatype">GPA Type</label>
+            <select id="gpatype" name="gpatype">
+              <option value="gpa">Overall GPA</option>
+              <option value="mathGpa">Math GPA</option>
+              <option value="cheGpa">Chemistry GPA</option>
+              <option value="phyGpa">Physics GPA</option>
+              <option value="zooGpa">Zoology GPA</option>
+              <option value="botGpa">Botany GPA</option>
+              <option value="csGpa">Computer Science GPA</option>
+            </select>
+          </div>
+          <div style="color: red">
+            This result may be delay more than due to higher calculations!
+          </div>
+          <br />
+          <button id="rankButton" onclick="showRank()">Show Rank</button>
+
+          <div id="rankresults"></div>
+        </div>
+      </div>
     </div>
     <footer class="footer">
-        <p>Developed and maintained by Isuru Shanaka, Department of Computer Science</p>
+      <p>
+        Developed and maintained by Isuru Shanaka, Department of Computer
+        Science
+      </p>
     </footer>
-    
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Disable certain key combinations
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'a' || event.key === 'p')) {
-                event.preventDefault();
-            }
-            if (event.key === 'F12') {
-                event.preventDefault();
-            }
+    <script>
+      function addField() {
+        const form = document.getElementById("gpaForm");
+        const newField = document.createElement("div");
+        newField.classList.add("form-group");
+        newField.innerHTML = `
+                <input type="text" name="subjectCode[]" placeholder="Subject Code" required>
+                <input type="text" name="grade[]" placeholder="Grade (e.g. A-)" required>
+                <span  class="remove-field-link" onclick="removeField(this)">Remove</span>
+            `;
+        form.insertBefore(newField, form.querySelector(".add-field-btn"));
+      }
+
+      function removeField(button) {
+        // Remove the parent div of the button (the form group containing the input fields)
+        button.parentElement.remove();
+      }
+      //   document.addEventListener("contextmenu", (event) =>
+      //     event.preventDefault()
+      //   );
+
+      // Handle form submission
+      document
+        .getElementById("gpaForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+          const subjects = formData.getAll("subjectCode[]");
+          const grades = formData.getAll("grade[]");
+          const stnum = formData.get("studentNumber");
+
+          //   for (let pair of formData.entries()) {
+          //     if (pair[0] === "subjectCode[]") subjects.push(pair[1]);
+          //     if (pair[0] === "grade[]") grades.push(parseFloat(pair[1]));
+          //   }
+
+          const requestBody = {
+            stnum,
+            subjects,
+            grades,
+          };
+
+          // Send data to the server
+          fetch("https://res-proxy.onrender.com/calculateGPA", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const elementsToClear = [
+                "new gpa",
+                "new mathgpa",
+                "new chegpa",
+                "new phygpa",
+                "new zoogpa",
+                "new botgpa",
+                "new csgpa",
+              ];
+
+              document.getElementById(
+                "newgpa"
+              ).innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
+
+              const gpas = {
+                newmathgpa: data.mathGpa,
+                newchegpa: data.cheGpa,
+                newphygpa: data.phyGpa,
+                newzoogpa: data.zooGpa,
+                newbotgpa: data.botGpa,
+                newcsgpa: data.csGpa,
+              };
+
+              for (const [id, gpa] of Object.entries(gpas)) {
+                document.getElementById(id).innerHTML = !isNaN(gpa)
+                  ? `<div>${id
+                      .split("new gpa")[0]
+                      .toUpperCase()} GPA: ${gpa}</div><br>`
+                  : "";
+              }
+            })
+            .catch((error) => {
+              document.getElementById(
+                "newgpa"
+              ).innerHTML = `<p style="color:red;">${error.message}</p>`;
+              const elementsToClear = [
+                "new mathgpa",
+                "new chegpa",
+                "new phygpa",
+                "new zoogpa",
+                "new botgpa",
+                "new csgpa",
+              ];
+              elementsToClear.forEach(
+                (id) => (document.getElementById(id).innerHTML = "")
+              );
+            });
         });
 
-        function disableResultButton() {
-            document.getElementById('resultButton').disabled = true;
+      // Disable certain key combinations
+      document.addEventListener("keydown", function (event) {
+        if (
+          event.ctrlKey &&
+          (event.key === "u" ||
+            event.key === "s" ||
+            event.key === "a" ||
+            event.key === "p")
+        ) {
+          event.preventDefault();
         }
-
-        function enableResultButton() {
-            document.getElementById('resultButton').disabled = false;
+        if (event.key === "F12") {
+          event.preventDefault();
         }
+      });
 
-        function disableRankButton() {
-            document.getElementById('rankButton').disabled = true;
-        }
+      function disableResultButton() {
+        document.getElementById("resultButton").disabled = true;
+      }
 
-        function enableRankButton() {
-            document.getElementById('rankButton').disabled = false;
-        }
+      function enableResultButton() {
+        document.getElementById("resultButton").disabled = false;
+      }
 
-        function showResult() {
-            disableResultButton();
-            const stnum = document.getElementById('stnum').value;
-            const rlevel = document.getElementById('rlevel').value;
-            
-            const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('No Access to View This Data');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const elementsToClear = ['gpa', 'mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
-                    if (data.message === 'Rest in Peace') {
-                        const hMessage = `
+      function disableRankButton() {
+        document.getElementById("rankButton").disabled = true;
+      }
+
+      function enableRankButton() {
+        document.getElementById("rankButton").disabled = false;
+      }
+
+      function showResult() {
+        disableResultButton();
+        const stnum = document.getElementById("stnum").value;
+        const rlevel = document.getElementById("rlevel").value;
+
+        const url = `https://res-proxy.onrender.com/results?stnum=${stnum}&rlevel=${rlevel}`;
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("No Access to View This Data");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const elementsToClear = [
+              "gpa",
+              "mathgpa",
+              "chegpa",
+              "phygpa",
+              "zoogpa",
+              "botgpa",
+              "csgpa",
+            ];
+            if (data.message === "Rest in Peace") {
+              const hMessage = `
                             <p style="color:red; text-align:center;">
                                 <strong>Rest in Heaven</strong><br><br>
                                 Our hearts are heavy with sorrow as we remember a beloved student who is no longer with us.
                                 May their soul find eternal peace, and may their memory live on in the hearts of all who knew and loved them.
                             </p>`;
-                        document.getElementById('results').innerHTML = hMessage;
-                        elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
-                    } else {
-                        document.getElementById('results').innerHTML = `<div>${data.data}</div>`;
-                        document.getElementById('gpa').innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
-                        
-                        const gpas = {
-                            mathgpa: data.mathGpa,
-                            chegpa: data.cheGpa,
-                            phygpa: data.phyGpa,
-                            zoogpa: data.zooGpa,
-                            botgpa: data.botGpa,
-                            csgpa: data.csGpa
-                        };
-                        
+              document.getElementById("results").innerHTML = hMessage;
+              elementsToClear.forEach(
+                (id) => (document.getElementById(id).innerHTML = "")
+              );
+            } else {
+              document.getElementById(
+                "results"
+              ).innerHTML = `<div>${data.data}</div>`;
+              document.getElementById(
+                "gpa"
+              ).innerHTML = `<div>GPA: ${data.gpa}</div><br>`;
 
-                        for (const [id, gpa] of Object.entries(gpas)) {
-                            document.getElementById(id).innerHTML = !isNaN(gpa) ? `<div>${id.split('gpa')[0].toUpperCase()} GPA: ${gpa}</div><br>` : '';
-                        }
-                        
-                    }
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(0) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
-                    enableResultButton();
-                })
-                .catch(error => {
-                    document.getElementById('results').innerHTML = `<p style="color:red;">${error.message}</p><br>`;
-                    document.getElementById('gpa').innerHTML = `<div>GPA: No Access!!</div><br>`;
-                    
-                    const elementsToClear = ['mathgpa', 'chegpa', 'phygpa', 'zoogpa', 'botgpa', 'csgpa'];
-                    elementsToClear.forEach(id => document.getElementById(id).innerHTML = '');
-                    document.getElementById('stimg').innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${stnum.startsWith(0) ? stnum.slice(1) : stnum}.jpg" width="100px" alt="">`;
-                    enableResultButton();
-                });
+              const gpas = {
+                mathgpa: data.mathGpa,
+                chegpa: data.cheGpa,
+                phygpa: data.phyGpa,
+                zoogpa: data.zooGpa,
+                botgpa: data.botGpa,
+                csgpa: data.csGpa,
+              };
+
+              for (const [id, gpa] of Object.entries(gpas)) {
+                document.getElementById(id).innerHTML = !isNaN(gpa)
+                  ? `<div>${id
+                      .split("gpa")[0]
+                      .toUpperCase()} GPA: ${gpa}</div><br>`
+                  : "";
+              }
+            }
+            document.getElementById(
+              "stimg"
+            ).innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${
+              stnum.startsWith(0) ? stnum.slice(1) : stnum
+            }.jpg" width="100px" alt="">`;
+            enableResultButton();
+          })
+          .catch((error) => {
+            document.getElementById(
+              "results"
+            ).innerHTML = `<p style="color:red;">${error.message}</p><br>`;
+            document.getElementById(
+              "gpa"
+            ).innerHTML = `<div>GPA: No Access!!</div><br>`;
+
+            const elementsToClear = [
+              "mathgpa",
+              "chegpa",
+              "phygpa",
+              "zoogpa",
+              "botgpa",
+              "csgpa",
+            ];
+            elementsToClear.forEach(
+              (id) => (document.getElementById(id).innerHTML = "")
+            );
+            document.getElementById(
+              "stimg"
+            ).innerHTML = `<img src="https://paravi.ruh.ac.lk/rumis/picture/user_pictures/student_std_pics/fosmis_pic/sc${
+              stnum.startsWith(0) ? stnum.slice(1) : stnum
+            }.jpg" width="100px" alt="">`;
+            enableResultButton();
+          });
+      }
+
+      function showRank() {
+        disableRankButton();
+        const startnum = parseInt(
+          document.getElementById("startnum").value,
+          10
+        );
+        const endnum = parseInt(document.getElementById("endnum").value, 10);
+        const stnumrank = parseInt(
+          document.getElementById("stnumrank").value,
+          10
+        );
+        const gpatype = document.getElementById("gpatype").value;
+
+        if (
+          isNaN(startnum) ||
+          isNaN(endnum) ||
+          isNaN(stnumrank) ||
+          stnumrank < startnum ||
+          stnumrank > endnum
+        ) {
+          alert(
+            "Please enter a valid student number within the specified range."
+          );
+          enableRankButton();
+          return;
+        }
+        if (startnum > endnum) {
+          alert("Please enter a valid range.");
+          enableRankButton();
+          return;
+        }
+        if (endnum - startnum > 400) {
+          alert("Please enter a range less than 100.");
+          enableRankButton();
+          return;
         }
 
-        function showRank() {
-            disableRankButton();
-            const startnum = parseInt(document.getElementById('startnum').value, 10);
-            const endnum = parseInt(document.getElementById('endnum').value, 10);
-            const stnumrank = parseInt(document.getElementById('stnumrank').value, 10);
-            const gpatype = document.getElementById('gpatype').value;
-            
-            if (isNaN(startnum) || isNaN(endnum) || isNaN(stnumrank) || stnumrank < startnum || stnumrank > endnum) {
-                alert('Please enter a valid student number within the specified range.');
-                enableRankButton();
-                return;
-            }
-            if(startnum > endnum){
-                alert('Please enter a valid range.');
-                enableRankButton();
-                return;
-            }
-            if(endnum - startnum > 400){
-                alert('Please enter a range less than 100.');
-                enableRankButton();
-                return;
-            }
-
-            const url = `https://rank-proxy.onrender.com/calculateRank?startnum=${startnum}&endnum=${endnum}&stnum=${stnumrank}&gpatype=${gpatype}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const rankResult = `
+        const url = `https://rank-proxy.onrender.com/calculateRank?startnum=${startnum}&endnum=${endnum}&stnum=${stnumrank}&gpatype=${gpatype}`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const rankResult = `
                         <div>Total Students in Range: ${data.totalCount}</div><br>
                         <div>Your Rank: ${data.rank}</div><br>
                         <div>Highest GPA: ${data.highestGpa}</div><br>
                         <div>Lowest GPA: ${data.lowestGpa}</div><br>
                         <div>Average GPA: ${data.averageGpa}</div><br>
                     `;
-                    document.getElementById('rankresults').innerHTML = rankResult;
-                    enableRankButton();
-                })
-                .catch(error => {
-                    document.getElementById('rankresults').innerHTML = `<p style="color:red;">Error fetching rank data: ${error.message}</p>`;
-                    enableRankButton();
-                });
-        }
+            document.getElementById("rankresults").innerHTML = rankResult;
+            enableRankButton();
+          })
+          .catch((error) => {
+            document.getElementById(
+              "rankresults"
+            ).innerHTML = `<p style="color:red;">Error fetching rank data: ${error.message}</p>`;
+            enableRankButton();
+          });
+      }
     </script>
-</body>
+  </body>
 </html>
