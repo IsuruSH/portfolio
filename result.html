@@ -173,12 +173,16 @@
         Thank you for your patience!
       </div>
       <div style="color: red; margin: 10px">
-  If you want to remove your results from this system, please contact me through WhatsApp. 
-  <span style="color: blue; text-decoration: underline; cursor: pointer;" onclick="window.location.href='https://wa.me/94768324613';">
-    click here
-  </span>
-</div>
-     
+        If you want to remove your results from this system, please contact me
+        through WhatsApp.
+        <span
+          style="color: blue; text-decoration: underline; cursor: pointer"
+          onclick="window.location.href='https://wa.me/94768324613';"
+        >
+          click here
+        </span>
+      </div>
+
       <div class="container-res">
         <div class="container">
           <h2>Get Student Results</h2>
@@ -309,6 +313,20 @@
     </footer>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const stnumInput = document.getElementById("stnum");
+
+        // Add an event listener to the input field
+        stnumInput.addEventListener("input", function () {
+          const stnumValue = stnumInput.value;
+
+          // Check if the input length is exactly 5 digits
+          if (stnumValue.length === 5) {
+            // Automatically trigger the result fetch function
+            showResult();
+          }
+        });
+      });
       function addField() {
         const form = document.getElementById("gpaForm");
         const newField = document.createElement("div");
@@ -325,9 +343,9 @@
         // Remove the parent div of the button (the form group containing the input fields)
         button.parentElement.remove();
       }
-       document.addEventListener("contextmenu", (event) =>
-          event.preventDefault()
-        );
+      document.addEventListener("contextmenu", (event) =>
+        event.preventDefault()
+      );
 
       // Handle form submission
       document
